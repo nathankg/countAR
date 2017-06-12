@@ -10,16 +10,39 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // model
+    var count = 0 {
+        //property observer
+        didSet {
+            updateUI()
+        }
+    }
+
+    // view
+    @IBOutlet weak var countLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        updateUI()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func add(_ sender: Any) {
+        count += 1
     }
-
-
+    
+    @IBAction func subtract(_ sender: Any) {
+        count -= 1
+    }
+    
+    @IBAction func reset(_ sender: Any) {
+        count = 0
+    }
+    
+    @IBOutlet weak var minusButton: UIButton!
+    
+    private func updateUI() {
+        countLabel.text = "\(count)"
+        minusButton.isEnabled = count > 0
+    }
 }
 
